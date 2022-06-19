@@ -1,14 +1,5 @@
 #!/bin/bash
 
-#echo"deb http://old-releases.ubuntu.com/ubuntu/ utopic main restricted" >> /etc/apt/sources.list
-#echo"deb-src http://old-releases.ubuntu.com/ubuntu/ utopic main restricted" >> /etc/apt/sources.list
-#echo"deb http://old-releases.ubuntu.com/ubuntu/ utopic-updates main restricted" >> /etc/apt/sources.list
-#echo"deb-src http://old-releases.ubuntu.com/ubuntu/ utopic-updates main restricted" >> /etc/apt/sources.list
-#echo"deb http://old-releases.ubuntu.com/ubuntu/ utopic universe multiverse" >> /etc/apt/sources.list
-#echo"deb-src http://old-releases.ubuntu.com/ubuntu/ utopic universe multiverse" >> /etc/apt/sources.list
-#echo"deb http://old-releases.ubuntu.com/ubuntu utopic-security main restricted" >> /etc/apt/sources.list
-#echo"deb-src http://old-releases.ubuntu.com/ubuntu utopic-security main restricted" >> /etc/apt/sources.list
-#echo"deb http://old-releases.ubuntu.com/ubuntu/ utopic-backports main restricted universe multiverse" >> /etc/apt/sources.list
 
 WDIR=$(pwd)
 KERNEL_LIST=$(ls /boot/vmlinuz*)
