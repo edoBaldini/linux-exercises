@@ -32,7 +32,7 @@ func Overwrite (file *os.File) (error) {
                 size_left = Min(f_stat.Size() - index, b_size)
 		
 		b1 := make([]byte, b_size)
-		f_rand, _ := os.OpenFile("/dev/random", os.O_RDONLY, 0555)
+		f_rand, _ := os.OpenFile("/dev/urandom", os.O_RDONLY, 0555)
 		f_rand.Read(b1)
 		f_rand.Close()
                 
