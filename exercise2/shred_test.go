@@ -65,7 +65,10 @@ func TestSymLink(t *testing.T) {
 	if answ != nil {
 		t.Errorf("Nil expected, instead %s", answ)
 	}
+        os.Remove("symlink-to-file")
+	os.Remove("no_empty")
 }
+
 
 /*	
 	This test checks if Shred fails providing a file that does NOT exist 
@@ -120,3 +123,84 @@ func TestNoRWFile(t *testing.T) {
 	os.Remove("no_rw")
 }
 
+/*
+        This test checks if a symbolic link to a file with no access permissions
+	generates the failure.
+        Expected result: nil
+*/
+func TestSymLinkFileNoAccess(t *testing.T) {
+        file, err := os.Create("no_empty")
+        if err != nil {
+                fmt.Printf("error during the environment setup %s", err)
+        }
+        _, err = file.Write([]byte("hello"))
+        if err != nil {
+                fmt.Printf("error during the environment setup %s", err)
+        }
+        file.Close()
+        err = os.Symlink("no_empty", "symlink-to-file")
+        if err != nil {
+                fmt.Printf("error during the environment setup %s", err)
+        }
+	os.Chmod("no_empty", 0111)
+        answ := Shred("symlink-to-file")
+        if answ == nil {
+                t.Errorf("Nil expected, instead %s", answ)
+        }
+        os.Remove("symlink-to-file")
+	os.Remove("no_empty")
+}
+
+/*
+        This test checks if a symbolic link with no access permission to a file
+        generates the failure.
+        Expected result: nil
+*/
+func TestSymLinkNoAccess(t *testing.T) {
+        file, err := os.Create("no_empty")
+        if err != nil {
+                fmt.Printf("error during the environment setup %s", err)
+        }
+        _, err = file.Write([]byte("hello"))
+        if err != nil {
+                fmt.Printf("error during the environment setup %s", err)
+        }
+        file.Close()
+        err = os.Symlink("no_empty", "symlink-to-file")
+        if err != nil {
+                fmt.Printf("error during the environment setup %s", err)
+        }
+        os.Chmod("symlink-to-file", 0111)
+        answ := Shred("symlink-to-file")
+        if answ == nil {
+                t.Errorf("Nil expected, instead %s", answ)
+        }
+        os.Remove("no_empty")
+        os.Remove("symlink-to-file")
+}
+
+/*
+        This test checks if a symbolic link broken to generates the failure.
+        Expected result: nil
+*/
+func TestBrokenSymLink(t *testing.T) {
+        file, err := os.Create("no_empty")
+        if err != nil {
+                fmt.Printf("error during the environment setup %s", err)
+        }
+        _, err = file.Write([]byte("hello"))
+        if err != nil {
+                fmt.Printf("error during the environment setup %s", err)
+        }
+        file.Close()
+        err = os.Symlink("no_empty", "symlink-to-file")
+        if err != nil {
+                fmt.Printf("error during the environment setup %s", err)
+        }
+        os.Remove("no_empty")
+        answ := Shred("symlink-to-file")
+        if answ == nil {
+                t.Errorf("Nil expected, instead %s", answ)
+        }
+        os.Remove("symlink-to-file")
+}
