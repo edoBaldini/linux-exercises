@@ -10,6 +10,8 @@ INITRD=$(echo $INITRD_LIST | awk '{print $1}')
 get_kernel ()
 {
 	wget -c https://cdn.kernel.org/pub/linux/kernel/v5.x/linux-5.18.5.tar.xz
+	tar -xf linux*
+	rm linux-5.18.5.tar.xz
 	cd linux*
 	make defconfig
 	RES=$?
