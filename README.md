@@ -1,8 +1,8 @@
 # Linux exercise
 
-## Exercise 1
+## Exercise 1
 
-### Bootable linux qemu script
+### Bootable linux qemu script
 
 This shell script creates and runs a Linux filesystem image using QEMU that will print “hello world” after startup. 
 The script assumes that the system already has:
